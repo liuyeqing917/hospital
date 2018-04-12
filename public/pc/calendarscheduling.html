@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+
+<script type="text/javascript" src="../js/layout.js"></script>
+<link href='../js/fullcalendar/fullcalendar.min.css' rel='stylesheet' />
+<link href='../js/fullcalendar/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+<script src='../js/fullcalendar/lib/moment.min.js'></script>
+<script src='../js/fullcalendar/lib/jquery.min.js'></script>
+<script src='../js/fullcalendar/fullcalendar.js'></script>
+<script src='../js/fullcalendar/locale/zh-cn.js'></script>
+<script>
+    var json = [{
+        name:'请问',
+        type:1,
+        age:'15'
+    },{
+        name:'二位',
+        type:1,
+        age:'15'
+    },{
+        name:'发的',
+        type:1,
+        age:'15'
+    },{
+        name:'要团',
+        type:1,
+        age:'15'
+    },{
+        name:'kk',
+        type:1,
+        age:'15'
+    },{
+        name:'tt',
+        type:1,
+        age:'15'
+    },{
+        name:'dd',
+        type:1,
+        age:'15'
+    },{
+        name:'这些',
+        type:2,
+        age:'15'
+    },{
+        name:'啊啊',
+        type:2,
+        age:'15'
+    },{
+        name:'宝宝',
+        type:2,
+        age:'15'
+    },{
+        name:'yy',
+        type:2,
+        age:'15'
+    },{
+        name:'bb',
+        type:2,
+        age:'15'
+    },{
+        name:'pp',
+        type:2,
+        age:'15'
+    },{
+        name:'重出',
+        type:2,
+        age:'15'
+    }]
+    // var index = Math.floor((Math.random()*json.length)); 
+  $(document).ready(function() {
+    var myDate = new Date();
+    //获取当前年
+    var year = myDate.getFullYear(); 
+    //当前月
+    var month = myDate.getMonth()+1;
+    //当前天数
+    function mGetDate(year, month){
+        var d = new Date(year, month, 0);
+        return d.getDate();
+    }
+    var num = mGetDate(year,month);
+    //产生当月日期
+    var datearry = [];
+    if(month<10){
+        month = '0'+ month;
+    }
+    //获取周末
+    function time(y,m){
+        var tempTime = new Date(y,m,0);
+        var time = new Date();
+        var saturday = new Array();
+        var sunday = new Array();
+        for(var i=1;i<=tempTime.getDate();i++){
+            time.setFullYear(y,m-1,i);
+            var day = time.getDay();
+            if(day == 6){
+                saturday.push(i);
+            }else if(day == 0){
+                sunday.push(i);
+            }
+        }
+        var weekend =  saturday.concat(sunday);
+        return weekend
+    }
+    var weekends = time(year,month);
+    //判断数组中是否存在
+    function isInArray(arr,value){
+        for(var i = 0; i < arr.length; i++){
+            if(value === arr[i]){
+                return true;
+            }
+        }
+        return false;
+    }
+    //产生数组
+    var repeatname1 = '';
+    var repeatname2 = '';
+    for (var i =1 ; i<=num;i++){
+        var alljsons = remove(json,repeatname1);
+        var alljson =  remove(alljsons,repeatname2);
+        if(isInArray(weekends,i)){
+            if(i<10){
+                i = '0'+i;
+            }
+            var date = year+'-'+ month +'-'+i;
+            var newjson = alljson.filter((p) => {
+                return p.type == 1;
+            });
+            var pername = newjson[Math.floor((Math.random()*newjson.length))].name;
+            repeatname1 = pername;
+            var x = {
+                title: pername+'(夜)',
+                start: date
+            }
+            var newalljson = remove(alljson,pername);
+            var stuname = newalljson[Math.floor((Math.random()*newalljson.length))].name;
+            repeatname2 = stuname;
+            var xx = {
+                title: stuname+'(夜)',
+                start: date
+            }
+            var newallwhitejson = json.filter((p) => {
+                return p.type == 1;
+            });
+            var whitename = newallwhitejson[Math.floor((Math.random()*newallwhitejson.length))].name;
+            var xa = {
+                title: whitename+'(白)',
+                start: date
+            }
+            var newwhitejson = remove(json,whitename);
+            var stuwhitename = newwhitejson[Math.floor((Math.random()*newwhitejson.length))].name;
+            var xb = {
+                title: stuwhitename+'(白)',
+                start: date
+            }
+            var mnejson = removearry(alljson,pername,stuname,whitename,stuwhitename);
+            var menname = mnejson[Math.floor((Math.random()*mnejson.length))].name;
+            var xc = {
+                title: menname+'(门)',
+                start: date
+            }
+            datearry.push(x);
+            datearry.push(xx);
+            datearry.push(xa);
+            datearry.push(xb);
+            datearry.push(xc);
+        }else{
+            if(i<10){
+                i = '0'+i;
+            }
+            var date = year+'-'+ month +'-'+i;
+            var newjson = alljson.filter((p) => {
+                return p.type == 1;
+            });
+            var pername = newjson[Math.floor((Math.random()*newjson.length))].name;
+            repeatname1 = pername;
+            var x = {
+                title: pername+'(夜)',
+                start: date
+            }
+            var newalljson = remove(alljson,pername);
+            var stuname = newalljson[Math.floor((Math.random()*newalljson.length))].name;
+            repeatname2 = stuname;
+            var xx = {
+                title: stuname+'(夜)',
+                start: date
+            }
+            datearry.push(x);
+            datearry.push(xx);
+        }
+    }
+
+    function remove(arr,item){
+        var newarr = [];
+        for(var i=0;i<arr.length;i++){
+            if(arr[i].name != item){
+                newarr.push(arr[i]);
+            }
+        }
+        return newarr;
+    }
+    function removearry(arr,item1,item2,item3,item4){
+        var newarr = [];
+        for(var i=0;i<arr.length;i++){
+            if(arr[i].name != item1&&arr[i].name != item2&&arr[i].name != item3&&arr[i].name != item4){
+                newarr.push(arr[i]);
+            }
+        }
+        return newarr;
+    }
+    function abc(){
+        $('#calendar').fullCalendar({
+            aspectRatio:1.1,
+            weekends:true,
+            editable: true,
+            eventLimit: true, 
+            events: datearry
+        });
+    }
+    $("#clickbtn").click(function(){
+        abc()
+    }) 
+    
+    
+
+  });
+
+</script>
+<style>
+
+  #calendar {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+</style>
+</head>
+<body>
+    <div class="row" style="margin:17px">
+        <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title" style="min-height:60px;">
+                        <h5>排班日历 </h5>
+                        <div class="ibox-tools">
+                                <a href="#">
+                                    <button class="btn btn-primary" type="button" id="clickbtn">生成排班</button>
+                                </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                            <div id='calendar'></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<script type="text/javascript" src="../js/layout.js"></script>
+	<meta charset="UTF-8">
+	<title>高州市人民医院 - 住院医师轮转系统 - 人员管理</title>
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap-datetimepicker.min.css" />
+	<script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js"></script>
+
+	<style>
+		.exam {
+			margin: 17px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="exam">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title" style="min-height:60px;">
+						<h5>人员管理</h5>
+						<div class="ibox-tools">
+							<a href="personnelmanagementform.html">
+								<button class="btn btn-primary" type="button">新增</button>
+							</a>
+						</div>
+					</div>
+					<div class="ibox-content">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>编号</th>
+									<th>账号</th>
+									<th>姓名</th>
+									<th>工号</th>
+									<th>手机号</th>
+									<th>邮箱</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td>admin</td>
+									<td>管理员</td>
+									<td>123456</td>
+									<td>123456321213</td>
+									<td>1234563@qq.com</td>
+									<td>
+										<a href="personnelmanagementform.html">
+											<button class="btn btn-info btn-sm" type="button">编辑</button>
+										</a>
+										<button class="btn btn-warning btn-sm deleteper" type="button">删除</button>
+									</td>
+								</tr>
+								<tr>
+									<td>2</td>
+									<td>admin</td>
+									<td>管理员</td>
+									<td>123456</td>
+									<td>123456321213</td>
+									<td>1234563@qq.com</td>
+									<td>
+										<a href="personnelmanagementform.html">
+											<button class="btn btn-info btn-sm" type="button">编辑</button>
+										</a>
+										<button class="btn btn-warning btn-sm deleteper" type="button">删除</button>
+									</td>
+								</tr>
+								<tr>
+									<td>3</td>
+									<td>admin</td>
+									<td>管理员</td>
+									<td>123456</td>
+									<td>123456321213</td>
+									<td>1234563@qq.com</td>
+									<td>
+										<a href="personnelmanagementform.html">
+											<button class="btn btn-info btn-sm" type="button">编辑</button>
+										</a>
+										<button class="btn btn-warning btn-sm deleteper" type="button">删除</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+</body>
+<script>
+	$(function () {
+		$(".deleteper").click(function () {
+			uselayer(2, '确定要删除该条信息吗？', function () {
+				window.location.reload();
+			});
+		})
+	})
+</script>
+
+</html>
